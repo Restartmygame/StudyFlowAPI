@@ -32,7 +32,7 @@ namespace StudyFlowAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetByIdAsync(int id)
+        public async Task<IActionResult> GetById(int id)
         {
             var tarefa = await _context.Tarefas.FindAsync(id);
 
@@ -76,7 +76,7 @@ namespace StudyFlowAPI.Controllers
             };
 
             return CreatedAtAction(
-                nameof(GetByIdAsync),
+                nameof(GetById),
                 new { id = tarefa.Id },
                 response
                 );
