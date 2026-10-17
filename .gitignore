@@ -1,0 +1,12 @@
+# arquivos gerados pelo .NET
+bin/
+obj/
+
+# configurações locais do Visual Studio
+.vs/
+*.suo
+*.csproj.user
+
+# arquivos do sistema
+.DS_Store
+*.log

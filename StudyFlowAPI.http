@@ -1,0 +1,39 @@
+@StudyFlowAPI_HostAddress = http://localhost:5288
+@tarefaId = 1
+
+GET {{StudyFlowAPI_HostAddress}}/api/tarefas
+Accept: application/json
+
+###
+
+GET {{StudyFlowAPI_HostAddress}}/api/tarefas/{{tarefaId}}
+Accept: application/json
+
+###
+
+POST {{StudyFlowAPI_HostAddress}}/api/tarefas
+Content-Type: application/json
+
+{
+  "titulo": "Entregar o Checkpoint 02",
+  "disciplina": "Programação Mobile",
+  "dataEntrega": "2026-10-20"
+}
+
+###
+
+PUT {{StudyFlowAPI_HostAddress}}/api/tarefas/{{tarefaId}}
+Content-Type: application/json
+
+{
+  "titulo": "Entregar o Checkpoint 02 atualizado",
+  "disciplina": "Programação Mobile",
+  "dataEntrega": "2026-10-20",
+  "status": "Concluida"
+}
+
+###
+
+DELETE {{StudyFlowAPI_HostAddress}}/api/tarefas/{{tarefaId}}
+
+###
