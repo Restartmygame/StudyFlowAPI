@@ -15,9 +15,9 @@ POST {{StudyFlowAPI_HostAddress}}/api/tarefas
 Content-Type: application/json
 
 {
-  "titulo": "Entregar o Checkpoint 02",
+  "titulo": "Apresentar o Checkpoint 03",
   "disciplina": "Programação Mobile",
-  "dataEntrega": "2026-10-20"
+  "dataEntrega": "2026-11-04"
 }
 
 ###
@@ -26,9 +26,9 @@ PUT {{StudyFlowAPI_HostAddress}}/api/tarefas/{{tarefaId}}
 Content-Type: application/json
 
 {
-  "titulo": "Entregar o Checkpoint 02 atualizado",
+  "titulo": "Apresentar o Checkpoint 03 atualizado",
   "disciplina": "Programação Mobile",
-  "dataEntrega": "2026-10-20",
+  "dataEntrega": "2026-11-04",
   "status": "Concluida"
 }
 
