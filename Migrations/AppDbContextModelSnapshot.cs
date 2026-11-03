@@ -32,9 +32,17 @@ namespace StudyFlowAPI.Migrations
                     b.Property<DateTime>("DataEntrega")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
                     b.Property<string>("Disciplina")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Importancia")
+                        .HasColumnType("int");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");

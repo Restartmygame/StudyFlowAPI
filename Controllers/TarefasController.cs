@@ -25,8 +25,10 @@ namespace StudyFlowAPI.Controllers
                 {
                     Id = t.Id,
                     Titulo = t.Titulo,
+                    Descricao = t.Descricao,
                     Disciplina = t.Disciplina,
                     DataEntrega = t.DataEntrega,
+                    Importancia = t.Importancia.ToString(),
                     Status = t.Status.ToString()
                 })
                 .ToListAsync();
@@ -60,11 +62,23 @@ namespace StudyFlowAPI.Controllers
             if (erroValidacao is not null)
                 return BadRequest(erroValidacao);
 
+            if (
+                !Enum.TryParse<ImportanciaTarefa>(
+                    dto.Importancia,
+                    true,
+                    out var importancia
+                ) ||
+                !Enum.IsDefined(importancia)
+            )
+                return BadRequest("A importância informada é inválida.");
+
             var tarefa = new Tarefa
             {
                 Titulo = dto.Titulo.Trim(),
+                Descricao = dto.Descricao?.Trim() ?? string.Empty,
                 Disciplina = dto.Disciplina.Trim(),
-                DataEntrega = dto.DataEntrega.Date,
+                DataEntrega = dto.DataEntrega,
+                Importancia = importancia,
                 Status = StatusTarefa.Pendente
             };
 
@@ -97,6 +111,16 @@ namespace StudyFlowAPI.Controllers
             )
                 return BadRequest("O status informado é inválido.");
 
+            if (
+                !Enum.TryParse<ImportanciaTarefa>(
+                    dto.Importancia,
+                    true,
+                    out var importancia
+                ) ||
+                !Enum.IsDefined(importancia)
+            )
+                return BadRequest("A importância informada é inválida.");
+
             var tarefa = await _context.Tarefas.FindAsync(id);
 
             if (tarefa is null)
@@ -108,8 +132,10 @@ namespace StudyFlowAPI.Controllers
                 });
 
             tarefa.Titulo = dto.Titulo.Trim();
+            tarefa.Descricao = dto.Descricao?.Trim() ?? string.Empty;
             tarefa.Disciplina = dto.Disciplina.Trim();
-            tarefa.DataEntrega = dto.DataEntrega.Date;
+            tarefa.DataEntrega = dto.DataEntrega;
+            tarefa.Importancia = importancia;
             tarefa.Status = status;
 
             await _context.SaveChangesAsync();
@@ -142,8 +168,10 @@ namespace StudyFlowAPI.Controllers
             {
                 Id = tarefa.Id,
                 Titulo = tarefa.Titulo,
+                Descricao = tarefa.Descricao,
                 Disciplina = tarefa.Disciplina,
                 DataEntrega = tarefa.DataEntrega,
+                Importancia = tarefa.Importancia.ToString(),
                 Status = tarefa.Status.ToString()
             };
         }

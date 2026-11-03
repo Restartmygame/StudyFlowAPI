@@ -22,8 +22,10 @@ Web API REST responsável pelo cadastro e pela persistência das tarefas do apli
 ## Validações
 
 - título obrigatório, com 3 a 100 caracteres;
+- descrição opcional, com até 300 caracteres;
 - disciplina obrigatória, com 2 a 60 caracteres;
-- data de entrega obrigatória e válida;
+- data e horário de entrega obrigatórios e válidos;
+- importância aceita: `Opcional`, `Banal`, `Rotineiro`, `Importante`, `MuitoImportante` ou `Urgente`;
 - status aceito: `Pendente` ou `Concluida`.
 
 ## Configurar o SQL Server
@@ -51,7 +53,7 @@ dotnet ef database update
 dotnet run --launch-profile http
 ```
 
-O `dotnet-ef` só precisa ser instalado uma vez. Se ele já estiver instalado, prossiga com os próximos comandos.
+O `dotnet-ef` só precisa ser instalado uma vez. Se ele já estiver instalado, prossiga com os próximos comandos. O comando `dotnet ef database update` também aplica a migration que acrescenta descrição e importância a um banco criado por uma versão anterior.
 
 Endereços locais:
 
@@ -83,7 +85,7 @@ Controllers/  endpoints e respostas HTTP
 Data/         contexto do Entity Framework
 DTO/          dados recebidos e devolvidos pela API
 Migrations/   criação da tabela no banco
-Models/       entidade e enum de status
+Models/       entidade e enums de status e importância
 Program.cs    serviços, Swagger, CORS e pipeline HTTP
 ```
 
