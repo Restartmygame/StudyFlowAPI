@@ -91,7 +91,10 @@ namespace StudyFlowAPI.Controllers
             if (erroValidacao is not null)
                 return BadRequest(erroValidacao);
 
-            if (!Enum.TryParse<StatusTarefa>(dto.Status, true, out var status))
+            if (
+                !Enum.TryParse<StatusTarefa>(dto.Status, true, out var status) ||
+                !Enum.IsDefined(status)
+            )
                 return BadRequest("O status informado é inválido.");
 
             var tarefa = await _context.Tarefas.FindAsync(id);
